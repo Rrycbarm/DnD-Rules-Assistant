@@ -10,7 +10,6 @@ WORKDIR /app
 
 # torch CPU-only, prima del resto
 RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
-RUN pip install sentence-transformers==3.0.1
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

@@ -1,6 +1,6 @@
-fastmcp
-langchain-chroma
-langchain-huggingface
-langchain-classic
-langchain-text-splitters
-sentence-transformers
+fastmcp>=2.0
+langchain-chroma>=1.0
+langchain-huggingface>=1.0
+langchain-classic>=1.0
+langchain-text-splitters>=1.0
+sentence-transformers==3.0.1
