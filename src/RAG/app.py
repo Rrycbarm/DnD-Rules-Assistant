@@ -43,7 +43,8 @@ For every question:
 
 Some questions need MORE THAN ONE retrieval. Rule CONCEPTS are retrievable
 too, not just named entities. Valid queries include: "hit points per level",
-"level advancement", "saving throw", "advantage", "armor class".
+"level advancement", "saving throw", "advantage", "armor class", "fireball",
+"warlock", "elf".
    
 Reuse previously retrieved text ONLY for terms already retrieved in this
 conversation. Any NEW named entity (class, monster, spell, item) requires a
