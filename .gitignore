@@ -1,0 +1,5 @@
+.env
+markdown/*
+data/*
+!markdown/.gitkeep
+!data/.gitkeep

@@ -1,0 +1,7 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+langchain-core>=1.0
+langgraph>=1.0
+langgraph-checkpoint>=2.0
+langchain-mcp-adapters>=0.2
+langchain-openrouter>=0.1

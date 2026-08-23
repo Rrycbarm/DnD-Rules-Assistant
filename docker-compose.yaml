@@ -1,0 +1,52 @@
+name: dnd-rag
+
+services:
+  ingest:
+    # image: populate_chroma
+    build: ./src/populate_chroma
+    profiles: ["populate"]
+    environment:
+      BATCH_SIZE: ${BATCH_SIZE}
+    volumes:
+      - ./markdown:/app/markdown:ro
+      - ./data/chroma_langchain_db:/app/chroma_langchain_db
+      - ./data/parent_store:/app/parent_store
+
+  mcp-server:
+    # image: mcp_server
+    build: ./src/MCP
+    profiles: ["chat"]
+    volumes:
+      - ./data/chroma_langchain_db:/app/chroma_langchain_db
+      - ./data/parent_store:/app/parent_store
+    environment:
+      DOCUMENT_K: ${DOCUMENT_K}
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import socket; socket.create_connection(('127.0.0.1', 8000), 2)"]
+      start_period: 60s
+    restart: unless-stopped
+
+  rag-webchat:
+    # image: rag
+    build: ./src/RAG
+    profiles: ["chat"]
+    environment:
+      MCP_SERVER_URL: ${MCP_SERVER_URL}
+      MODEL: ${MODEL}
+      MODEL_WEB: ${MODEL_WEB}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    ports:
+      - "8080:8080"
+    depends_on:
+      mcp-server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"]
+      start_period: 20s
+    restart: unless-stopped

@@ -1,0 +1,19 @@
+This project's source code is licensed under the MIT License (see LICENSE).
+
+--------------------------------------------------------------------------------
+
+THIRD-PARTY CONTENT
+
+This repository does not redistribute any Dungeons & Dragons content.
+`download_data.sh` fetches it at setup time from:
+
+    https://github.com/your5e/5e-srd-markdown
+
+The downloaded content is the System Reference Document 5.2.1 ("SRD 5.2.1")
+by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd.
+The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0
+International License, available at
+https://creativecommons.org/licenses/by/4.0/legalcode.
+
+If you redistribute this project together with the downloaded content, you
+must include the attribution statement above.
