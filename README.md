@@ -32,9 +32,7 @@ The system is composed of 3 modules:
 - [RAG](src/RAG/): server that exposes POST method to perform requests to the chatbot
 
 ### populate_chroma
-This is a fairly simple script that parses all the contents of the markdown folder (DirectoryLoader on all the .md files).          
-
-#### Chunking
+This is a fairly simple script that parses all the contents of the markdown folder (DirectoryLoader on all the .md files).           
 I used RecursiveCharacterTextSplitter, it is faster than a SemanticChunker, and it is probably better anyways on markdown files. I am using Parent-child chunking to use the child for the embedding, while passing the parent to the LLM.      
 You can try to change the chunk_size, or even remove the parent splitter, if you want to reduce the tokens used when the LLM receives the context from chroma.
 
