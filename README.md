@@ -25,6 +25,14 @@ You can do this simply running `./download_data.sh`, that will put the md files 
 The first 3 steps need to be run only once.      
 The third step may require ~10 minutes to complete.
 
+## Some metrics
+
+faithfulness | answer_relevancy | semantic_similarity | factual_correctness (f1) | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
+|---|---|---|---|---|---|---|---|---|---|---|
+ 0.935 | 0.862 | 0.903 | 0.689 | 0.412 | 0.847 | 0.943 | 0.943 | 1.91 | 0 | 7.4 |
+
+Using openai/gpt-5.6-luna as a judge in RAGAS. More details [here](evaluation/).
+
 ## Software architecture
 The system is composed of 3 modules:    
 - [populate_chroma](src/populate_chroma/): adds the markdown files into chroma (*data* folder)    

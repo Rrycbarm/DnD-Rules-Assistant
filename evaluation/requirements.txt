@@ -1,0 +1,7 @@
+ragas>=0.4
+langchain-community<0.4.2
+langchain-openrouter>=0.1
+langchain-huggingface>=1.0
+sentence-transformers==3.0.1
+httpx
+pandas

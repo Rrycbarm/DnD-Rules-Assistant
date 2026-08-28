@@ -33,41 +33,57 @@ NO_LOCAL = "NO_LOCAL_ANSWER"
 SYSTEM_PROMPT = f"""
 You are a D&D rules retrieval agent.
 
-You MUST follow this process:
+## Retrieval
 
-For every question:
-1. Decide if the answer requires locating a specific document.
+For every question, decide what facts you need, then call retrieve_rules once
+per fact with `query` set to the term you are looking for.
 
-2. If info is needed, call retrieve_rules with:
-   - `query`: the specific term you are looking for (e.g. "owlbear", "fireball")
+Rule CONCEPTS are retrievable, not just named entities. Valid queries include:
+"fireball", "warlock", "owlbear", "hit points per level", "level advancement",
+"saving throw", "armor class", "proficiency bonus".
 
-Some questions need MORE THAN ONE retrieval. Rule CONCEPTS are retrievable
-too, not just named entities. Valid queries include: "hit points per level",
-"level advancement", "saving throw", "advantage", "armor class", "fireball",
-"warlock", "elf".
-   
-Reuse previously retrieved text ONLY for terms already retrieved in this
-conversation. Any NEW named entity (class, monster, spell, item) requires a
-fresh retrieve_sources call, even if the conversation already contains
-related rules text.
+Many questions need MORE THAN ONE retrieval.
+
+Worked example — "how many rapier hits to kill a level 13 warlock":
+  retrieve_rules("rapier")                -> weapon damage and properties
+  retrieve_rules("warlock hit point die") -> the class trait
+  retrieve_rules("hit points per level")  -> the general formula
+Three retrievals, then combine them.
+
+Reuse retrieved text ONLY for terms already retrieved in this conversation.
+Any NEW entity or rule requires a fresh retrieve_rules call, even if related
+text is already present.
+
+## Answering
 
 NEVER state a numeric value (hit points, hit dice, damage, AC, DC, range)
 unless it appears in retrieved text visible above. If you need a number you
-have not retrieved, call the tools. Do not rely on your own knowledge of D&D.
+have not retrieved, call the tool. Do not rely on your own knowledge of D&D.
 
-If numerical estimates are needed to answer the user request, use average values
-for dice throw, but explicitly say so. When performing math, state the formulas explicitly.
+If a value the user did not give is required for a calculation, do not assume
+a typical value: state the formula with that value left symbolic and say what
+you need.
+
+When the question asks for a count, a total, or a comparison, give the answer,
+not just the ingredients. Show the formula explicitly, and say when you are
+using dice averages.
 
 Every answer ends with a "Sources:" line listing the SOURCE paths you used.
 
-Then, if the retrieved text does not actually contain something the user asked
-about and you are not able to infer it from the local sources — the retrieval 
-returned related material but not that specific entity — add ONE MORE LINE, alone,
-after "Sources:", nothing following it:
+## When something is missing
+
+If the retrieved text does not contain a fact you need, and you cannot derive
+it from what you have, add ONE MORE LINE, alone, after "Sources:", nothing
+following it:
 
 {NO_LOCAL}: <the exact term that is missing>
-Before emitting NO_LOCAL_ANSWER, do it only if the answer is incomplete and 
-you cannot find the information in the tool.
+
+Before emitting it, ask yourself: is the missing piece a general rule I have
+not searched for yet? If so, search for it FIRST.
+
+Emit it only for a FACT you had to look up. Never emit it for a question you
+answered by combining or computing from retrieved facts, even if the user's
+exact question appears nowhere in the sources.
 """
 
 WEB_PROMPT = """You are completing a D&D 5e rules answer. Part of it was already
@@ -184,6 +200,7 @@ class ChatResponse(BaseModel):
     answer: str
     session_id: str
     trace: list[dict]
+    contexts: list[str] = [] 
 
 
 def _trace_of_last_turn(messages: list[AnyMessage]) -> list[dict]:
@@ -209,6 +226,16 @@ def _trace_of_last_turn(messages: list[AnyMessage]) -> list[dict]:
                             "url": a["url_citation"]["url"]})
     return trace
 
+def _contexts_of_last_turn(messages: list[AnyMessage]) -> list[str]:
+    """Un elemento per documento recuperato, non per tool call."""
+    idx = max((i for i, m in enumerate(messages) if isinstance(m, HumanMessage)),
+              default=-1)
+    out = []
+    for m in messages[idx + 1:]:
+        if isinstance(m, ToolMessage):
+            body = str(m.content)
+            out += [f"SOURCE: {c}" for c in body.split("SOURCE: ") if c.strip()]
+    return out
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
@@ -238,6 +265,7 @@ async def chat(req: ChatRequest):
         answer=answer if isinstance(answer, str) else str(answer),
         session_id=session_id,
         trace=_trace_of_last_turn(result["messages"]),
+        contexts=_contexts_of_last_turn(result["messages"])
     )
 
 

@@ -1,0 +1,247 @@
+[
+  {
+    "q": "How many hit points does an owlbear have?",
+    "ref": "An owlbear has 59 hit points. Its hit point formula is 7d10 + 21.",
+    "num": "59",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the armor class of an owlbear?",
+    "ref": "An owlbear has an armor class of 13.",
+    "num": "13",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the walking speed of an owlbear?",
+    "ref": "An owlbear has a walking speed of 40 feet. It also has a climb speed of 40 feet.",
+    "num": "40",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the attack bonus and damage of an owlbear's Rend attack?",
+    "ref": "Rend is a melee attack roll with a bonus of +7. It deals 14 slashing damage on average. The damage formula is 2d8 + 5. The owlbear makes two Rend attacks with its Multiattack.",
+    "num": "2d8",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the challenge rating of an owlbear and how much XP is it worth?",
+    "ref": "An owlbear is challenge rating 3. It is worth 700 XP. Its proficiency bonus is +2.",
+    "num": "700",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the passive Perception of an owlbear?",
+    "ref": "An owlbear has a passive Perception of 15. Its Perception skill bonus is +5. It also has darkvision out to 60 feet.",
+    "num": "15",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the armor class of a goblin warrior?",
+    "ref": "A goblin warrior has an armor class of 15. It has 10 hit points, from the formula 3d6.",
+    "num": "15",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many hit points does a skeleton have?",
+    "ref": "A skeleton has 13 hit points. Its hit point formula is 2d8 + 4. Its armor class is 14.",
+    "num": "13",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many hit points does an ogre have?",
+    "ref": "An ogre has 68 hit points. Its hit point formula is 8d10 + 24. Its armor class is 11 and its speed is 40 feet.",
+    "num": "68",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the challenge rating of a troll and how many hit points does it have?",
+    "ref": "A troll is challenge rating 5. It is worth 1,800 XP and its proficiency bonus is +3. It has 94 hit points, from the formula 9d10 + 45.",
+    "num": "94",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How much damage does fireball deal at 3rd level?",
+    "ref": "Fireball deals 8d6 fire damage when cast with a 3rd-level slot. Each creature in the area makes a Dexterity saving throw. A creature takes the full damage on a failed save and half as much on a successful one. The average of 8d6 is 28.",
+    "num": "8d6",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the radius of a fireball and which saving throw does it call for?",
+    "ref": "Fireball affects a 20-foot-radius sphere. It calls for a Dexterity saving throw. A successful save halves the damage.",
+    "num": "20",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many darts does magic missile create and how much damage does each deal?",
+    "ref": "Magic missile creates three darts of magical force. Each dart deals 1d4 + 1 force damage, averaging 3.5. The darts hit automatically and can be aimed at one target or split among several. The spell creates one additional dart for each spell slot level above 1.",
+    "num": "1d4",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How much healing does cure wounds provide?",
+    "ref": "Cure wounds restores 2d8 hit points plus the caster's spellcasting ability modifier. The healing increases by 2d8 for each spell slot level above 1. Its range is touch.",
+    "num": "2d8",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What bonus to AC does the shield spell give?",
+    "ref": "The shield spell gives a +5 bonus to armor class. The bonus applies against the triggering attack and lasts until the start of your next turn. While it is active you take no damage from magic missile.",
+    "num": "+5",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What damage does a rapier deal and what properties does it have?",
+    "ref": "A rapier deals 1d8 piercing damage, averaging 4.5. It has the Finesse property, so the wielder may use Dexterity instead of Strength for attack and damage rolls. Its weapon mastery is Vex. It weighs 2 pounds and costs 25 GP.",
+    "num": "1d8",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What damage does a longsword deal when wielded with two hands?",
+    "ref": "A longsword deals 1d8 slashing damage in one hand. It has the Versatile property, so it deals 1d10 slashing damage when wielded with two hands. Its weapon mastery is Sap.",
+    "num": "1d10",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the armor class of chain mail and what does it require?",
+    "ref": "Chain mail gives a fixed armor class of 16. The Dexterity modifier does not apply. It requires a Strength score of 13. It imposes disadvantage on Dexterity (Stealth) checks.",
+    "num": "16",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the proficiency bonus of a level 13 character?",
+    "ref": "A level 13 character has a proficiency bonus of +5.",
+    "num": "+5",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many hit points does a level 5 paladin with 16 Constitution have?",
+    "ref": "A Constitution score of 16 gives a modifier of +3. A paladin has 10 + the Constitution modifier hit points at level 1, which is 13. Each level after the first grants 6 + the Constitution modifier, which is 9. Levels 2 through 5 are four levels, giving 36. The total is 13 + 36 = 49 hit points.",
+    "num": "49",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many hit points does a level 3 wizard with 14 Constitution have?",
+    "ref": "A Constitution score of 14 gives a modifier of +2. A wizard has 6 + the Constitution modifier hit points at level 1, which is 8. Each level after the first grants 4 + the Constitution modifier, which is 6. Levels 2 and 3 are two levels, giving 12. The total is 8 + 12 = 20 hit points.",
+    "num": "20",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many hit points does a level 4 barbarian with 18 Constitution have?",
+    "ref": "A Constitution score of 18 gives a modifier of +4. A barbarian has 12 + the Constitution modifier hit points at level 1, which is 16. Each level after the first grants 7 + the Constitution modifier, which is 11. Levels 2 through 4 are three levels, giving 33. The total is 16 + 33 = 49 hit points.",
+    "num": "49",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the armor class of a character in half plate with 16 Dexterity?",
+    "ref": "Half plate armor gives an armor class of 15 plus the Dexterity modifier, capped at +2. A Dexterity score of 16 gives a modifier of +3, but the cap limits it to +2. The resulting armor class is 17. Half plate also imposes disadvantage on Dexterity (Stealth) checks.",
+    "num": "17",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the armor class of a character in leather armor with 18 Dexterity and a shield?",
+    "ref": "Leather armor gives an armor class of 11 plus the Dexterity modifier, with no cap. A Dexterity score of 18 gives a modifier of +4, so the armor class is 15. A shield adds +2, bringing the total to 17.",
+    "num": "17",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What is the melee attack bonus of a level 5 fighter with 18 Strength and weapon proficiency?",
+    "ref": "The melee attack bonus is the Strength modifier plus the proficiency bonus. A Strength score of 18 gives a modifier of +4. A level 5 character has a proficiency bonus of +3. The total melee attack bonus is +7.",
+    "num": "+7",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many rapier hits, from a character with 14 Strength and 16 Dexterity, does it take to kill a level 13 warlock with 12 Constitution?",
+    "ref": "A rapier deals 1d8 piercing damage and has the Finesse property, so the attacker may use Dexterity instead of Strength. Dexterity 16 gives +3, which beats the +2 from Strength 14, so +3 is used. Average damage per hit is 4.5 + 3 = 7.5. A Constitution score of 12 gives a modifier of +1. A warlock has 8 + the Constitution modifier at level 1, which is 9, and 5 + the Constitution modifier per level after that, which is 6. Levels 2 through 13 are twelve levels, giving 72. The warlock has 9 + 72 = 81 hit points. Dividing 81 by 7.5 gives 10.8, so 11 hits are needed.",
+    "num": "11",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many rapier hits, from a character with 16 Dexterity, does it take to kill a troll?",
+    "ref": "A rapier deals 1d8 piercing damage, averaging 4.5, and is a Finesse weapon. Dexterity 16 gives a modifier of +3, so average damage per hit is 7.5. A troll has 94 hit points. Dividing 94 by 7.5 gives 12.53, so 13 hits are needed.",
+    "num": "13",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How many fireballs cast at 3rd level does it take to kill an ogre, assuming it fails every save?",
+    "ref": "Fireball deals 8d6 fire damage at 3rd level. The average of 8d6 is 28, since each d6 averages 3.5. An ogre has 68 hit points. Two fireballs deal 56 on average, which is not enough. Dividing 68 by 28 gives 2.43, so 3 fireballs are needed.",
+    "num": "3",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "How much total damage does magic missile deal on average when cast with a 3rd-level slot?",
+    "ref": "Magic missile creates three darts at 1st level and one additional dart per slot level above 1. A 3rd-level slot is two levels above 1, so it creates five darts. Each dart deals 1d4 + 1 force damage, averaging 3.5. Five darts average 17.5 force damage in total. The darts hit automatically, so no attack roll is made.",
+    "num": "17.5",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "Can a level 3 wizard with 14 Constitution survive a single fireball cast at 3rd level, if the save fails?",
+    "ref": "A Constitution score of 14 gives a modifier of +2. A level 3 wizard has 6 + 2 = 8 hit points at level 1 and 4 + 2 = 6 for each of levels 2 and 3, for a total of 20 hit points. Fireball deals 8d6 at 3rd level, averaging 28 damage. On a failed save the wizard takes the full 28, which exceeds 20 hit points. The wizard does not survive an average roll and is reduced to 0 hit points.",
+    "num": "20",
+    "sentinel": false,
+    "web": false
+  },
+  {
+    "q": "What are the tenets of the Oath of Conquest?",
+    "ref": "The Oath of Conquest is not in the SRD; the only paladin subclass included is the Oath of Devotion.",
+    "num": null,
+    "sentinel": true,
+    "web": false
+  },
+  {
+    "q": "What are the features of the Circle of Dreams druid?",
+    "ref": "The Circle of Dreams is not in the SRD; the only druid subclass included is the Circle of the Land.",
+    "num": null,
+    "sentinel": true,
+    "web": false
+  },
+  {
+    "q": "Describe the College of Swords bard subclass.",
+    "ref": "The College of Swords is not in the SRD; the only bard subclass included is the College of Lore.",
+    "num": null,
+    "sentinel": true,
+    "web": false
+  },
+  {
+    "q": "What does the Way of Shadow monk get at 3rd level?",
+    "ref": "The Way of Shadow is not in the SRD; the only monk subclass included is the Way of the Open Hand.",
+    "num": null,
+    "sentinel": true,
+    "web": false
+  },
+  {
+    "q": "What is the stat block of a beholder?",
+    "ref": "The beholder is not in the SRD; it is product identity and is not part of the CC-BY release.",
+    "num": null,
+    "sentinel": true,
+    "web": false
+  }
+]
