@@ -31,7 +31,7 @@ faithfulness | answer_relevancy | semantic_similarity | factual_correctness (f1)
 |---|---|---|---|---|---|---|---|---|---|---|
  0.935 | 0.862 | 0.903 | 0.689 | 0.412 | 0.847 | 0.943 | 0.943 | 1.91 | 0 | 7.4 |
 
-Using openai/gpt-5.6-luna as a judge in RAGAS. More details [here](evaluation/).
+Using google/gemma-4-31b-it as model and openai/gpt-5.6-luna as a judge in RAGAS. More details [here](evaluation/).
 
 ## Software architecture
 The system is composed of 3 modules:    
@@ -76,8 +76,6 @@ It would be nice to have a *real* db running on another container. Anyways, at t
 It *could* be useful to cache some responses. Maybe not the LLM ones, but some MCP queries may overlap. Again, it is just for the sake of it, and has no real utility in a local application with 1 user. MCP queries are also free, since I am running the embedding locally, so there are no tokens to save. Also, my pc would scream if I run a redis container on it.
 #### Token optimization
 With more than 1 user, it could be needed to reduce the chunk size or the number of chunks retrieved by chroma, in order to save token cost.
-#### Better prompt engineering
-Changing the system prompt has non-obvious effects on small models.
 
 ## Attribution
 
