@@ -1,15 +1,17 @@
 # mcp_server.py
+import os
+
 from fastmcp import FastMCP
 
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.retrievers import BM25Retriever
 from langchain_classic.storage import LocalFileStore, create_kv_docstore
-from langchain_classic.retrievers import ParentDocumentRetriever
+from langchain_classic.retrievers import EnsembleRetriever, ParentDocumentRetriever
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-import os
-
 DOCUMENT_K = int(os.getenv("DOCUMENT_K", 4))
+BM25_WEIGHT = float(os.getenv("BM25_WEIGHT", 0.5))
 
 mcp = FastMCP("dnd-rules")
 
@@ -30,11 +32,46 @@ parent_retriever = ParentDocumentRetriever(
     search_kwargs={"k": DOCUMENT_K},
 )
 
+import re
+STOP = {"the", "a", "an", "of", "and", "or", "to", "in", "is", "are", "for",
+        "with", "what", "how", "many", "much", "does", "do", "it", "its",
+        "hit", "points", "point", "damage", "rules"}
+
+def _tokenize(text: str) -> list[str]:
+    """lowercase + remove stopword. Help BM25 matching names"""
+    return [w for w in re.findall(r"[a-z0-9']+", text.lower()) if w not in STOP]
+
+
+def _build_retriever():
+
+    if BM25_WEIGHT <= 0:
+        print("[startup] chroma", flush=True)
+        return parent_retriever
+
+    parents = [d for d in docstore.mget(list(docstore.yield_keys())) if d]
+    if not parents:
+        print("[startup] docstore vuoto: solo ricerca densa. "
+              "Hai eseguito il profilo populate?", flush=True)
+        return parent_retriever
+
+    bm25 = BM25Retriever.from_documents(parents, preprocess_func=_tokenize)
+    bm25.k = DOCUMENT_K
+
+    print(f"[startup] hybrid: {len(parents)} parent, "
+          f"BM25 {BM25_WEIGHT:.2f} / dense {1 - BM25_WEIGHT:.2f}, "
+          f"k={DOCUMENT_K}", flush=True)
+
+    return EnsembleRetriever(
+        retrievers=[bm25, parent_retriever],
+        weights=[BM25_WEIGHT, 1 - BM25_WEIGHT],
+    )
+
+
+retriever = _build_retriever()
+
 
 @mcp.tool
-def retrieve_rules(
-    query: str,
-) -> str:
+def retrieve_rules(query: str) -> str:
     """
     Retrieve D&D rules.
 
@@ -42,9 +79,10 @@ def retrieve_rules(
     spells, mechanics, or other D&D rule references.
     """
 
-    print("[Retriever]", query)
+    docs = retriever.invoke(query)
 
-    docs = parent_retriever.invoke(query)
+    # :DOCUMENT_K, to avoid receiving 2k documents after the merge
+    docs = docs[:DOCUMENT_K]
 
     if not docs:
         return "No matching rules found."
@@ -57,6 +95,6 @@ def retrieve_rules(
 if __name__ == "__main__":
     mcp.run(
         transport="streamable-http",
-        host="0.0.0.0",   
+        host="0.0.0.0",
         port=8000,
     )

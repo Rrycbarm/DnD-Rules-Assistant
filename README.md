@@ -29,7 +29,7 @@ The third step may require ~10 minutes to complete.
 
 | factual_correctness (f1) | faithfulness | semantic_similarity | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
 |---|---|---|---|---|---|---|---|---|---|
-| **0.706** | **0.936** | 0.906 | 0.348 | **0.860** | **0.943** | **0.943** | 2.0 | 0 | 8.1 |
+| **0.726** | **0.957** | **0.916** | 0.302 | **0.916** | **0.971** | **1.000** | 1.71 | 0 | 5.9 |
 
 Using google/gemma-4-31b-it as model and openai/gpt-5.6-luna as a judge in RAGAS. More details [here](evaluation/).
 
@@ -46,7 +46,7 @@ You can try to change the chunk_size, or even remove the parent splitter, if you
 
 ### MCP
 FastMCP server that exposes the tool retrieve_rules over http.    
-This tool wraps a retrieval in the chroma vector store.          
+This tool wraps a hybrid search, combining BM25 with the Chroma vector store. The env BM25_WEIGHT sets the proportion to use. Setting it to 0, will result in using only chroma.                 
 Do I *really* need a MCP server for a single tool, that could have been hardcoded in the RAG project? Maybe not, but I think it is cleaner in this way.
 
 ### RAG

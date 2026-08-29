@@ -21,6 +21,7 @@ services:
       - ./data/parent_store:/app/parent_store
     environment:
       DOCUMENT_K: ${DOCUMENT_K}
+      BM25_WEIGHT: ${BM25_WEIGHT}
     healthcheck:
       test: ["CMD", "python", "-c",
              "import socket; socket.create_connection(('127.0.0.1', 8000), 2)"]

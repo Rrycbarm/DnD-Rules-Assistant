@@ -4,3 +4,5 @@ langchain-huggingface>=1.0
 langchain-classic>=1.0
 langchain-text-splitters>=1.0
 sentence-transformers==3.0.1
+langchain-community>=0.4
+rank-bm25>=0.2
