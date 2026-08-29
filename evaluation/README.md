@@ -18,5 +18,5 @@ I may keep this table, with the improvements as they come.
 | gemma-4-31b-it-baseline-28-08 | 0.669 | 0.867 | **0.909** | **0.375** | 0.755 | 0.886 | 0.914 | 1.6 | 0 | **5.1** |
 
 ## Updates
-- 28/08: New prompt seems to improve the performance of the model. Low context precision, maybe DOCUMENT_K is too high. The two remaining numeric failures are ogre and troll hit points: hybrid search might help. The avg_sec does not seem to be relevant, often depends on the OpenRouter provider.
+- 28/08: New prompt seems to improve the performance of the model. Low context precision, maybe DOCUMENT_K is too high. The remaining numeric failures are ogre and troll hit points, and longsword damage: hybrid search might help. The avg_sec does not seem to be relevant, often depends on the OpenRouter provider.
 
