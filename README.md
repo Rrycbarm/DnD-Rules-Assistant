@@ -27,9 +27,9 @@ The third step may require ~10 minutes to complete.
 
 ## Some metrics
 
-faithfulness | answer_relevancy | semantic_similarity | factual_correctness (f1) | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
-|---|---|---|---|---|---|---|---|---|---|---|
- 0.935 | 0.862 | 0.903 | 0.689 | 0.412 | 0.847 | 0.943 | 0.943 | 1.91 | 0 | 7.4 |
+| factual_correctness (f1) | faithfulness | semantic_similarity | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
+|---|---|---|---|---|---|---|---|---|---|
+| **0.706** | **0.936** | 0.906 | 0.348 | **0.860** | **0.943** | **0.943** | 2.0 | 0 | 8.1 |
 
 Using google/gemma-4-31b-it as model and openai/gpt-5.6-luna as a judge in RAGAS. More details [here](evaluation/).
 

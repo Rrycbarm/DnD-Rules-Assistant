@@ -24,18 +24,20 @@ import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_openrouter import ChatOpenRouter
+# from langchain_openrouter import ChatOpenRouter
+from langchain_openai import ChatOpenAI
 
 from ragas import EvaluationDataset, evaluate
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 from ragas.metrics import (
-    Faithfulness, ResponseRelevancy, SemanticSimilarity,
+    Faithfulness, SemanticSimilarity,
     FactualCorrectness, LLMContextPrecisionWithReference, LLMContextRecall,
 )
+from ragas.run_config import RunConfig
 
 API = os.getenv("API", "http://localhost:8080/chat")
-JUDGE_MODEL = os.getenv("JUDGE_MODEL", "openai/gpt-5.6-luna")
+JUDGE_MODEL = "openai/gpt-5.6-luna"
 NO_LOCAL = "NO_LOCAL_ANSWER"
 OUT = Path("runs.csv")
 
@@ -101,16 +103,21 @@ for c in CASES:
             "reference": c["ref"],
         })
 
-judge = LangchainLLMWrapper(ChatOpenRouter(model=JUDGE_MODEL, temperature=0))
-judge_emb = LangchainEmbeddingsWrapper(
-    HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5"))
+HTTP = httpx.Client(transport=httpx.HTTPTransport(local_address="0.0.0.0"), timeout=240)
+judge = LangchainLLMWrapper(ChatOpenAI(
+    model=JUDGE_MODEL,
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.environ["OPENROUTER_API_KEY"],
+    http_client=HTTP, temperature=0, max_retries=0,
+))
+judge_emb = LangchainEmbeddingsWrapper(HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5"))
 result = evaluate(EvaluationDataset.from_list(samples),
-                  metrics=[Faithfulness(llm=judge),
-                           ResponseRelevancy(llm=judge, embeddings=judge_emb),
+                  metrics=[FactualCorrectness(llm=judge, mode="f1"),
+                           Faithfulness(llm=judge),
                            SemanticSimilarity(embeddings=judge_emb), 
-                           FactualCorrectness(llm=judge, mode="f1"),
                            LLMContextPrecisionWithReference(llm=judge), 
-                           LLMContextRecall(llm=judge)])
+                           LLMContextRecall(llm=judge)],
+                  run_config=RunConfig(max_workers=8, timeout=300, max_retries=3))
 
 
 scores = result.to_pandas().mean(numeric_only=True).round(3).to_dict()
@@ -120,7 +127,6 @@ row = {
     "label": label,
     **scores,
     # "faithfulness": avg(result["faithfulness"], 3),
-    # "relevancy": round(result["answer_relevancy"], 3),
     # "similarity": round(result["semantic_similarity"], 3),
     # "factual": round(result["factual_correctness(mode=f1)"], 3),
     # "ctx_precision": round(result["llm_context_precision_with_reference"], 3),

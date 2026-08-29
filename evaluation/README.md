@@ -12,11 +12,11 @@ The metrics are the ones provided by RAGAS, plus:
 
 I may keep this table, with the improvements as they come.
 
-| label | faithfulness | answer_relevancy | semantic_similarity | factual_correctness (f1) | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| gemma-4-31b-it-new-prompt-28-08 | 0.935 | 0.862 | 0.903 | 0.689 | 0.412 | 0.847 | 0.943 | 0.943 | 1.91 | 0 | 7.4 |
-| gemma-4-31b-it-baseline-28-08 | 0.916 | 0.818 | 0.914 | 0.671 | 0.391 | 0.793 | 0.886 | 0.914 | 1.77 | 0 | 6.6 |
+| label | factual_correctness (f1) | faithfulness | semantic_similarity | ctx_precision | ctx_recall | numeric | sentinel | avg_calls | no_call | avg_secs |
+|---|---|---|---|---|---|---|---|---|---|---|
+| gemma-4-31b-it-new-prompt-28-08 | **0.706** | **0.936** | 0.906 | 0.348 | **0.860** | **0.943** | **0.943** | 2.0 | 0 | 8.1 |
+| gemma-4-31b-it-baseline-28-08 | 0.669 | 0.867 | **0.909** | **0.375** | 0.755 | 0.886 | 0.914 | 1.6 | 0 | **5.1** |
 
-## Considerations
-- 28/08: new prompt seems to improve the performance of the model. Low context precision, maybe K_document is too high. Also, maybe hybridsearch can fix the tests that are failing.
+## Updates
+- 28/08: New prompt seems to improve the performance of the model. Low context precision, maybe DOCUMENT_K is too high. The two remaining numeric failures are ogre and troll hit points: hybrid search might help. The avg_sec does not seem to be relevant, often depends on the OpenRouter provider.
 
