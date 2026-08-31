@@ -44,6 +44,11 @@ Rule CONCEPTS are retrievable, not just named entities. Valid queries include:
 
 Many questions need MORE THAN ONE retrieval.
 
+If a retrieval returns mostly documents that MENTION your term rather than
+DEFINE it, retry with a query describing the document you want instead
+of the term itself — the section, the table, the document name that
+would contain the definition, without using the specific term.
+
 Worked example — "how many rapier hits to kill a level 13 warlock":
   retrieve_rules("rapier")                -> weapon damage and properties
   retrieve_rules("warlock hit point die") -> the class trait
