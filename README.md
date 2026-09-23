@@ -5,6 +5,9 @@ It uses rules retrieved from local files, with a web fallback if needed.
 
 ![example1](media/example1.png)
 
+If you are interested in a solution based on Azure AI Foundry, try [this](https://github.com/Rrycbarm/DnD-Rules-Assistant-Azure).         
+
+
 ## Where is the data? Where do the rules come from?
 The rules come from the D&D System Reference Document v5.2.1, published under [Creative Commons Attribution 4.0 International License \("CC-BY-4.0"\)](https://creativecommons.org/licenses/by/4.0/).    
 To avoid parsing the PDF files (you can try to do it with Docling, PyMuPDFLoader, or alternatives), I suggest downloading the parsed files from
